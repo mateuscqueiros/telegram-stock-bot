@@ -109,6 +109,7 @@ bot/
 Este repositório é usado no workshop **Bot Telegram B3 — 1 hora no Cursor**.
 
 - **Alunos:** clone a branch `starter` e construa o bot na aula com o Agent do Cursor
+- **Instrutor:** veja [docs/GUIA_INSTRUTOR.md](docs/GUIA_INSTRUTOR.md) e [docs/CHECKLIST_ALUNOS.md](docs/CHECKLIST_ALUNOS.md)
 - **Solução:** esta branch (`main`) contém o código completo
 
 ```bash

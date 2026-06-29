@@ -1,10 +1,10 @@
-# Bot Telegram B3 — Workshop Cursor
+# Bot Telegram B3 — Workshop Claude Code
 
 ## Objetivo do workshop
 
-Ensinar o fluxo **Claude Code no Cursor**: planejar → pedir ao Agent → validar no terminal.
+Ensinar o fluxo **Claude Code**: pedir → revisar diff → validar no terminal.
 
-O aluno **não escreve código manualmente** — ele escreve prompts e aprova as edições do Agent.
+O aluno **não escreve código manualmente** — usa o CLI `claude` e aprova as edições.
 
 ## Estrutura
 
@@ -28,14 +28,14 @@ bot/
 - Mensagens ao usuário em **português**
 - Formato de preço: `R$ 35,42` (vírgula como separador decimal)
 - Formato de variação: `+1,23%` ou `-0,45%`
-- **Na aula:** o Agent gera o código; o aluno só revisa e testa
+- **Na aula:** Claude Code gera o código; o aluno revisa e testa
 
 ## Variáveis de ambiente
 
 | Variável | Obrigatória | Descrição |
 |---|---|---|
 | `TELEGRAM_TOKEN` | Sim | Token do @BotFather |
-| `BRAPI_TOKEN` | Não | Token brapi.dev (aumenta limite de requisições) |
+| `BRAPI_TOKEN` | Não | Token brapi.dev |
 | `ALERT_INTERVAL_SECONDS` | Não | Intervalo do JobQueue (padrão: 60) |
 
 ## Como rodar
@@ -44,7 +44,7 @@ bot/
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-cp .env.example .env             # preencher TELEGRAM_TOKEN
+cp .env.example .env
 python -m bot.main
 ```
 
@@ -52,5 +52,5 @@ python -m bot.main
 
 - Endpoint: `GET https://brapi.dev/api/quote/{TICKER}`
 - Header opcional: `Authorization: Bearer {BRAPI_TOKEN}`
-- **Sem token**, só funcionam: `PETR4`, `VALE3`, `MGLU3`, `ITUB4` (demais tickers retornam 401)
+- **Sem token**, só funcionam: `PETR4`, `VALE3`, `MGLU3`, `ITUB4`
 - Resposta relevante: `results[0].regularMarketPrice`, `regularMarketChangePercent`, `shortName`

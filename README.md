@@ -106,8 +106,9 @@ bot/
 
 ## Workshop
 
-Workshop de **1 hora** focado em **dirigir o Agent do Cursor** (plano gratuito — sem assinatura paga). Alunos colam prompts; o AI escreve o código.
+Workshop de **1 hora** com **Claude Code** (CLI). Alunos enviam prompts; o Claude implementa o código.
 
 - **Alunos:** `git clone -b starter ...` — veja o README da branch starter
 - **Instrutor:** [docs/GUIA_INSTRUTOR.md](docs/GUIA_INSTRUTOR.md) · [docs/CHECKLIST_ALUNOS.md](docs/CHECKLIST_ALUNOS.md)
+- **Contexto do projeto:** [CLAUDE.md](CLAUDE.md)
 - **Solução:** branch `main`

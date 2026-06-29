@@ -4,8 +4,8 @@
 
 ## O que você vai aprender
 
-- Instalar e usar o **Claude Code CLI** (`claude`)
-- Dar contexto com **`CLAUDE.md`**
+- Criar **`CLAUDE.md`** — as regras do seu projeto (memória do Claude Code)
+- Usar o **Claude Code CLI** (`claude`)
 - Pedir implementações em linguagem natural
 - Iterar: Claude Code → terminal → Telegram → corrigir com novo prompt
 
@@ -22,7 +22,7 @@ O bot de cotações da B3 é o **projeto de prática**, não o foco da aula.
 | Git | Sim |
 | Token Telegram ([@BotFather](https://t.me/BotFather)) | Sim |
 | Token [brapi.dev](https://brapi.dev) | Recomendado |
-| Editor de código (VS Code, Cursor, etc.) | Sim — terminal integrado para comandos |
+| Cursor (ou VS Code) | Sim — terminal integrado |
 
 ---
 
@@ -77,19 +77,20 @@ BRAPI_TOKEN=seu_token_brapi
 
 | Arquivo | Descrição |
 |---|---|
-| `CLAUDE.md` | **Leia primeiro.** Regras que o Claude Code segue |
-| `bot/config.py` | Leitura do `.env` |
-| `requirements.txt` | Dependências |
+| `requirements.txt` | Dependências Python |
 | `.env.example` | Modelo de configuração |
+| `README.md` | Este roteiro |
 
-## O que o Claude Code constrói na aula
+**Não tem código do bot.** Você constrói tudo na aula com o Claude Code.
 
-| Arquivo | Bloco |
+## O que você constrói na aula
+
+| O quê | Bloco |
 |---|---|
-| `bot/main.py` | 2 e 4 |
-| `bot/handlers/commands.py` | 2 e 3 |
-| `bot/quotes.py` | 3 |
-| `bot/handlers/alerts.py` | 4 |
+| `CLAUDE.md` | 0 — regras do projeto |
+| Bot com `/start` e `/help` | 1 |
+| Comando `/cotacao` | 2 |
+| Comando `/alerta` | 3 |
 
 ---
 
@@ -98,55 +99,56 @@ BRAPI_TOKEN=seu_token_brapi
 **Cursor** → **File → Open Folder** → `telegram-stock-bot`  
 Terminal (**`` Ctrl+` ``**) — mantenha o venv ativo (`(.venv)` no prompt).
 
-### Bloco 1 (0–5 min) — Primeiro contato
+> **Dica:** descreva **o que o bot deve fazer**. Depois do Bloco 0, o `CLAUDE.md` guarda as regras — basta pedir "Leia CLAUDE.md".
+
+### Bloco 0 (0–10 min) — Criar as regras do projeto
+
+Primeiro passo: **criar o `CLAUDE.md`** (você define como o bot deve funcionar).
 
 ```bash
 source .venv/Scripts/activate
-claude
+claude "Leia o README.md. Crie um arquivo CLAUDE.md com as regras do nosso bot de cotações da B3 no Telegram. Inclua: mensagens em português, preço em reais com vírgula, usar a API brapi.dev, token do Telegram no .env, e os comandos /start, /help, /cotacao e /alerta. Crie só o CLAUDE.md por agora."
 ```
 
-No chat interativo:
-> O que falta neste projeto para ter um bot Telegram com /start? Leia CLAUDE.md.
+Revise o arquivo gerado. Esse é **o seu** contexto — o Claude Code vai ler em toda a aula.
 
-Depois:
-> Implemente o que descreveu, seguindo CLAUDE.md.
-
-### Bloco 2 (5–20 min) — Bot vivo
-
-No terminal do Cursor:
+### Bloco 1 (10–25 min) — Bot vivo
 
 ```bash
-claude "Leia CLAUDE.md e bot/config.py. Crie bot/handlers/commands.py com /start e /help e bot/main.py registrando os handlers. Use async, python-telegram-bot v21, token de config. Implemente tudo."
+claude "Leia CLAUDE.md. Faça o bot responder /start e /help no Telegram. O token está no .env. Implemente tudo."
 python -m bot.main
 ```
-Teste `/start` e `/help` no Telegram.
+
+Teste `/start` e `/help` no celular.
 
 Se der erro:
 ```bash
-claude "O bot falhou com este erro: [cole o erro]. Corrija seguindo CLAUDE.md."
+claude "Deu erro ao rodar o bot: [cole o erro]. Corrija seguindo CLAUDE.md."
 ```
 
-### Bloco 3 (20–40 min) — `/cotacao`
+### Bloco 2 (25–42 min) — `/cotacao`
 
 ```bash
-claude "Leia CLAUDE.md. Crie bot/quotes.py com get_quote(ticker) via httpx e brapi.dev. Adicione /cotacao em commands.py formatando preço (R$) e variação (%). Trate erro 401 e ticker inválido em português. Implemente tudo."
+claude "Leia CLAUDE.md. Faça o comando /cotacao PETR4 mostrar o nome da ação, o preço em reais e a variação do dia. Implemente tudo."
 ```
 
 Teste: `/cotacao PETR4` · `/cotacao VALE3` · `/cotacao XXXX`
 
-### Bloco 4 (40–55 min) — Alerta
+### Bloco 3 (42–55 min) — Alerta
 
 ```bash
-claude "Leia CLAUDE.md e bot/main.py. Crie bot/handlers/alerts.py com /alerta TICKER PRECO (1 alerta por chat, memória). JobQueue a cada 60s; quando preço >= limite, envie mensagem. Registre em main.py. Implemente tudo."
+claude "Leia CLAUDE.md. Faça o comando /alerta PETR4 35 avisar no Telegram quando a ação atingir esse preço. Implemente tudo."
 ```
 
-Teste: `/alerta PETR4 0.01`
+Teste: `/alerta PETR4 0.01` (limite baixo para disparar rápido)
 
-### Bloco 5 (55–60 min) — Fechamento
+### Bloco 4 (55–60 min) — Fechamento
 
-Recapitular: **prompt → Claude Code → aprovar diff → terminal → Telegram**
+Recapitular: **criar CLAUDE.md → prompt → Claude Code → terminal → Telegram**
 
-Solução: [branch main](https://github.com/mateuscqueiros/telegram-stock-bot/tree/main)
+Solução completa: [branch main](https://github.com/mateuscqueiros/telegram-stock-bot/tree/main)
+
+**Professor:** [docs/GUIA_PROFESSOR.md](docs/GUIA_PROFESSOR.md) · [docs/GUIA_INSTRUTOR.md](docs/GUIA_INSTRUTOR.md)
 
 ---
 
@@ -158,7 +160,6 @@ Solução: [branch main](https://github.com/mateuscqueiros/telegram-stock-bot/tr
 | `claude "tarefa"` | One-shot |
 | `claude -c` | Continuar conversa anterior |
 | `/help` | Ajuda dentro da sessão |
-| `/clear` | Limpar histórico |
 
 Docs: [code.claude.com/docs](https://code.claude.com/docs)
 

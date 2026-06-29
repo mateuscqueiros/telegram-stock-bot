@@ -71,8 +71,6 @@ TELEGRAM_TOKEN=seu_token_do_botfather
 BRAPI_TOKEN=seu_token_brapi
 ```
 
-Smoke test: `python -c "import telegram, httpx; print('OK')"`
-
 ---
 
 ## O que já vem pronto

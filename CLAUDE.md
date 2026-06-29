@@ -42,11 +42,19 @@ bot/
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
 python -m bot.main
 ```
+
+Ative o venv **antes** do `pip install` (escolha conforme seu terminal):
+
+| Terminal | Comando |
+|---|---|
+| **Git Bash** (Windows) | `source .venv/Scripts/activate` |
+| **PowerShell** (Windows) | `.venv\Scripts\Activate.ps1` |
+| **CMD** (Windows) | `.venv\Scripts\activate.bat` |
+| **Mac / Linux** | `source .venv/bin/activate` |
 
 ## API brapi
 

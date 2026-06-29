@@ -1,8 +1,10 @@
 # Bot Telegram B3 — Workshop Cursor
 
-## Objetivo
+## Objetivo do workshop
 
-Bot em Python que consulta cotações da B3 via [brapi.dev](https://brapi.dev) e responde no Telegram.
+Ensinar o fluxo **Claude Code no Cursor**: planejar → pedir ao Agent → validar no terminal.
+
+O aluno **não escreve código manualmente** — ele escreve prompts e aprova as edições do Agent.
 
 ## Estrutura
 
@@ -26,6 +28,7 @@ bot/
 - Mensagens ao usuário em **português**
 - Formato de preço: `R$ 35,42` (vírgula como separador decimal)
 - Formato de variação: `+1,23%` ou `-0,45%`
+- **Na aula:** o Agent gera o código; o aluno só revisa e testa
 
 ## Variáveis de ambiente
 

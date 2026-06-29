@@ -6,25 +6,29 @@
 
 Olá!
 
-No workshop vamos construir um bot de Telegram que consulta cotações da B3 usando o **Agent do Cursor**. Para aproveitar a aula, complete os itens abaixo **antes** de entrar na sala.
+Neste workshop você vai **dirigir um AI para escrever código** — não precisa saber Python. O projeto é um bot de Telegram com cotações da B3.
+
+## Importante: gratuito, sem assinatura
+
+- O **Cursor** (editor da aula) tem plano **Hobby gratuito** — sem cartão de crédito
+- Você **não vai digitar código**; vai colar prompts e o Agent implementa
+- São ~5 prompts na aula — cabe no limite gratuito do Agent
+- E-mail `.edu`? Cadastre-se no Cursor para **1 ano de Pro grátis**
 
 ## Software
 
-- [ ] [Cursor](https://cursor.com) instalado e logado (conta com **Agent** habilitado)
-- [ ] Python 3.11+ instalado — verifique com `python --version`
-- [ ] Git instalado — verifique com `git --version`
-- [ ] Telegram instalado no celular (para testar o bot ao vivo)
+- [ ] [Cursor](https://cursor.com) instalado, conta grátis criada e logada
+- [ ] Python 3.11+ — `python --version`
+- [ ] Git — `git --version`
+- [ ] Telegram no celular
 
 ## Contas e tokens
 
-- [ ] **Token do bot Telegram** — crie em [@BotFather](https://t.me/BotFather) com `/newbot`
-- [ ] **Token brapi.dev** (recomendado) — cadastre-se em [brapi.dev](https://brapi.dev) e gere o token no dashboard
-  - Sem token, só funcionam: PETR4, VALE3, MGLU3, ITUB4
-- [ ] **Conta GitHub** — para clonar o repositório
+- [ ] **Token Telegram** — [@BotFather](https://t.me/BotFather) → `/newbot`
+- [ ] **Token brapi.dev** (recomendado) — [brapi.dev](https://brapi.dev)
+- [ ] **Conta GitHub** — para clonar o repo
 
-## Setup do projeto
-
-Execute no terminal:
+## Setup
 
 ```bash
 git clone -b starter git@github.com:mateuscqueiros/telegram-stock-bot.git
@@ -37,31 +41,22 @@ pip install -r requirements.txt
 cp .env.example .env               # Windows: copy .env.example .env
 ```
 
-Edite o arquivo **`.env`** (nunca o `.env.example`):
+Edite o **`.env`**:
 
 ```env
 TELEGRAM_TOKEN=seu_token_do_botfather
 BRAPI_TOKEN=seu_token_brapi
-ALERT_INTERVAL_SECONDS=60
 ```
 
-## Smoke test
-
-```bash
-python -c "import telegram, httpx; print('OK')"
-```
-
-Se aparecer `OK`, você está pronto. **Não precisa rodar o bot ainda** — construiremos o código na aula.
+Smoke test: `python -c "import telegram, httpx; print('OK')"`
 
 ## Na aula
 
-1. Abra a pasta clonada no **Cursor**
+1. Abra a pasta no **Cursor**
 2. Abra o **Agent** (painel lateral)
-3. Tenha o **Telegram** aberto no celular
+3. **Cole os prompts** do README — não escreva código à mão
+4. Teste no **Telegram**
 
-## Links
-
-- Repositório (branch starter): https://github.com/mateuscqueiros/telegram-stock-bot/tree/starter
-- Solução (referência): https://github.com/mateuscqueiros/telegram-stock-bot/tree/main
-
-Qualquer dúvida, responda este e-mail.
+Links:
+- [Repo starter](https://github.com/mateuscqueiros/telegram-stock-bot/tree/starter)
+- [Solução](https://github.com/mateuscqueiros/telegram-stock-bot/tree/main)

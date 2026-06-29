@@ -106,14 +106,8 @@ bot/
 
 ## Workshop
 
-Este repositório é usado no workshop **Bot Telegram B3 — 1 hora no Cursor**.
+Workshop de **1 hora** focado em **dirigir o Agent do Cursor** (plano gratuito — sem assinatura paga). Alunos colam prompts; o AI escreve o código.
 
-- **Alunos:** clone a branch `starter` e construa o bot na aula com o Agent do Cursor
-- **Instrutor:** veja [docs/GUIA_INSTRUTOR.md](docs/GUIA_INSTRUTOR.md) e [docs/CHECKLIST_ALUNOS.md](docs/CHECKLIST_ALUNOS.md)
-- **Solução:** esta branch (`main`) contém o código completo
-
-```bash
-git clone -b starter git@github.com:mateuscqueiros/telegram-stock-bot.git
-```
-
-Leia `AGENTS.md` para as convenções do projeto.
+- **Alunos:** `git clone -b starter ...` — veja o README da branch starter
+- **Instrutor:** [docs/GUIA_INSTRUTOR.md](docs/GUIA_INSTRUTOR.md) · [docs/CHECKLIST_ALUNOS.md](docs/CHECKLIST_ALUNOS.md)
+- **Solução:** branch `main`

@@ -1,117 +1,125 @@
 # Guia do Instrutor — Workshop Bot Telegram B3
 
-Workshop de **60 minutos** no Cursor. Repositório: [mateuscqueiros/telegram-stock-bot](https://github.com/mateuscqueiros/telegram-stock-bot)
+Workshop de **60 minutos** focado em **Claude Code no Cursor** (não em Python).
+
+Repositório: [mateuscqueiros/telegram-stock-bot](https://github.com/mateuscqueiros/telegram-stock-bot)
 
 | Branch | Uso |
 |---|---|
-| `starter` | Alunos clonam e constroem o bot na aula |
+| `starter` | Alunos clonam — Agent constrói o código na aula |
 | `main` | Solução completa para consulta |
+
+---
+
+## Mensagem central da aula
+
+> **Alunos não digitam código. Eles dirigem o Agent.**
+
+- Colam prompts prontos do README
+- Clicam **Accept** nas edições propostas
+- Rodam `python -m bot.main` e testam no Telegram
+- Se falhar, colam prompt de correção com o erro
+
+---
+
+## Cursor gratuito — o que dizer à turma
+
+| Pergunta do aluno | Resposta |
+|---|---|
+| Preciso pagar? | **Não.** Plano Hobby grátis, sem cartão |
+| Preciso do Cursor? | **Sim** — é a ferramenta da aula (alternativa ao VS Code + extensões) |
+| O Agent funciona grátis? | Sim, com limite mensal — ~5 prompts cabem na aula |
+| Bateu o limite? | Use Chat do Cursor, pair programming, ou mostre no projetor |
+| Sou estudante? | E-mail `.edu` → 1 ano de Pro grátis no Cursor |
+
+**Não exija assinatura paga.** Avise sobre o limite do Agent no início.
 
 ---
 
 ## Antes da turma (checklist 24h)
 
-- [ ] Repo acessível: https://github.com/mateuscqueiros/telegram-stock-bot
-- [ ] Branch `starter` como padrão no GitHub (Settings → Default branch)
-- [ ] Enviar [CHECKLIST_ALUNOS.md](CHECKLIST_ALUNOS.md) por e-mail/Slack
+- [ ] Repo acessível
+- [ ] Branch `starter` como padrão no GitHub
+- [ ] Enviar [CHECKLIST_ALUNOS.md](CHECKLIST_ALUNOS.md)
 - [ ] Token de demo do BotFather (backup)
 - [ ] Testar brapi com e sem `BRAPI_TOKEN`
-- [ ] Testar clone limpo da branch `starter` (ver seção abaixo)
+- [ ] Testar clone limpo da branch `starter`
+- [ ] Preparar projetor com Agent aberto (demo ao vivo)
 
 ---
 
-## Claude Code no Cursor (Bloco 1 — explicar em 2 min)
+## Bloco 1 — Abertura (0–5 min)
 
-Na aula **não se instala** o Claude Code da Anthropic. O fluxo é no **Agent do Cursor**:
-
-| Conceito | No Cursor |
-|---|---|
-| Agent | **Agent mode** — edita arquivos e roda terminal |
-| Planejar | **Plan mode** — propõe passos sem alterar código |
-| Contexto | `@AGENTS.md`, `@bot/config.py` |
-| Validar | `python -m bot.main` + Telegram no celular |
-
-Fluxo: **Plan → Agent → terminal → Telegram → iterar com `@arquivo`**
+1. **"Vocês não vão digitar Python hoje"** — vão aprender a dirigir o AI
+2. Mostrar repo `starter` (só `config.py` + `AGENTS.md`)
+3. Plan mode: *"O que falta para o bot responder /start?"*
+4. Agent mode: *"Implemente seguindo @AGENTS.md"*
+5. Explicar: Cursor gratuito, limite do Agent, `@AGENTS.md`
 
 ---
 
-## Roteiro da aula (60 min)
+## Bloco 2 — Bot vivo (5–20 min)
 
-### Bloco 1 — Abertura (0–5 min)
+**Um prompt só (cole no Agent):**
 
-1. Mostrar estrutura do repo `starter` (só `config.py` + `AGENTS.md`)
-2. Plan mode: *"O que falta para o bot responder /start?"*
-3. Agent mode: *"Implemente o que planejamos"*
-4. Explicar `@AGENTS.md`
+> Leia @AGENTS.md e @bot/config.py. Crie `bot/handlers/commands.py` com `/start` e `/help` e `bot/main.py` registrando os handlers. Use async, python-telegram-bot v21, token de config. Implemente tudo sem pedir confirmação.
 
-### Bloco 2 — Bot vivo (5–20 min)
+**Validar:** `python -m bot.main` → `/start`, `/help`
 
-**Prompt (copiar no chat):**
+**Prompt de correção (se necessário):**
 
-> Leia @AGENTS.md. Implemente `/start` e `/help` em `bot/handlers/commands.py` e registre em `bot/main.py`. Use o token de `bot/config.py`.
+> O bot falhou com este erro: [erro]. Corrija seguindo @AGENTS.md.
 
-**Validar:**
+---
 
-```bash
-python -m bot.main
-```
+## Bloco 3 — `/cotacao` (20–40 min)
 
-Testar `/start` e `/help` no Telegram.
+**Um prompt só:**
 
-### Bloco 3 — `/cotacao` (20–40 min)
-
-**Prompt 1:**
-
-> Crie `bot/quotes.py` com `async def get_quote(ticker: str)` usando httpx e `https://brapi.dev/api/quote/{ticker}`. Trate ticker inválido e erro 401 com mensagem clara.
-
-**Prompt 2:**
-
-> Adicione `/cotacao` em `commands.py`: recebe o ticker, chama `get_quote` e responde com nome, preço em R$ e variação %.
+> Leia @AGENTS.md. Crie `bot/quotes.py` com `get_quote(ticker)` via httpx e brapi.dev. Adicione `/cotacao` em `commands.py` formatando preço (R$) e variação (%). Trate erro 401 e ticker inválido em português. Implemente tudo.
 
 **Validar:** `/cotacao PETR4`, `/cotacao VALE3`, `/cotacao XXXX`
 
-### Bloco 4 — Alerta (40–55 min)
+---
 
-**Prompt:**
+## Bloco 4 — Alerta (40–55 min)
 
-> Adicione `/alerta TICKER PRECO` em `bot/handlers/alerts.py`. Guarde 1 alerta por chat em memória. Use JobQueue para checar a cada 60s; quando preço >= limite, envie mensagem no chat. Registre em `main.py`.
+**Um prompt só:**
 
-**Validar:** `/alerta PETR4 0.01` (limite baixo para demo rápida)
+> Leia @AGENTS.md e @bot/main.py. Crie `bot/handlers/alerts.py` com `/alerta TICKER PRECO` (1 alerta por chat, memória). JobQueue a cada 60s; quando preço >= limite, envie mensagem. Registre em `main.py`. Implemente tudo.
 
-### Bloco 5 — Fechamento (55–60 min)
+**Validar:** `/alerta PETR4 0.01`
 
-1. Recapitular: Plan → Agent → terminal → Telegram
+---
+
+## Bloco 5 — Fechamento (55–60 min)
+
+1. Recapitular: **prompt → Agent → Accept → terminal → Telegram**
 2. Mostrar branch `main` no GitHub
 3. Q&A
 
 ---
 
-## Troubleshooting (slide ou quadro)
+## Troubleshooting
 
 | Problema | Solução |
 |---|---|
-| `KeyError: TELEGRAM_TOKEN` | Criar `.env` a partir de `.env.example` |
-| `InvalidToken` | Token errado no `.env` |
-| Bot não responde | `python -m bot.main` precisa estar rodando |
-| brapi 401 (ex: RANI3) | Adicionar `BRAPI_TOKEN` ou usar PETR4/VALE3/MGLU3/ITUB4 |
-| JobQueue desativado | `pip install "python-telegram-bot[job-queue]"` |
+| Aluno sem Cursor | Instalar na hora (plano grátis) ou pair programming |
+| Limite do Agent atingido | Chat do Cursor, colega, ou projetor do instrutor |
+| Aluno editando código à mão | Redirecionar: "cole um prompt no Agent" |
+| `KeyError: TELEGRAM_TOKEN` | Criar `.env` |
+| brapi 401 | `BRAPI_TOKEN` ou tickers gratuitos |
+| Bot não responde | `python -m bot.main` rodando |
 
 ---
 
-## Teste do clone starter (instrutor)
+## Plano B (45 min)
 
-```bash
-cd /tmp
-rm -rf telegram-stock-bot-test
-git clone -b starter git@github.com:mateuscqueiros/telegram-stock-bot.git telegram-stock-bot-test
-cd telegram-stock-bot-test
-python -m venv .venv
-source .venv/bin/activate          # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-python -c "import telegram, httpx; print('OK')"
-```
+Prioridade: **`/cotacao`** > alerta > Q&A
 
-Resultado esperado: `OK` e ausência de `bot/main.py`.
+Um prompt único para blocos 2+3 se a turma for lenta:
+
+> Leia @AGENTS.md e @bot/config.py. Implemente bot completo com /start, /help, /cotacao (brapi.dev) em commands.py, quotes.py e main.py. Async, python-telegram-bot v21.
 
 ---
 
@@ -120,12 +128,5 @@ Resultado esperado: `OK` e ausência de `bot/main.py`.
 | Arquivo | Uso |
 |---|---|
 | [CHECKLIST_ALUNOS.md](CHECKLIST_ALUNOS.md) | E-mail 48h antes |
-| [README starter](https://github.com/mateuscqueiros/telegram-stock-bot/blob/starter/README.md) | Alunos seguem na aula |
-| [README main](https://github.com/mateuscqueiros/telegram-stock-bot/blob/main/README.md) | Referência da solução |
-| [AGENTS.md](../AGENTS.md) | Contexto para o Agent |
-
-## Plano B (se faltar tempo)
-
-Prioridade: **`/cotacao` funcionando** > alerta > Q&A
-
-Com 45 min: bot + `/cotacao` + testar no celular.
+| [README starter](https://github.com/mateuscqueiros/telegram-stock-bot/blob/starter/README.md) | Prompts para colar |
+| [AGENTS.md](../AGENTS.md) | Contexto do Agent |

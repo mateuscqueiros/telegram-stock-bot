@@ -22,7 +22,7 @@ O bot de cotações da B3 é o **projeto de prática**, não o foco da aula.
 | Git | Sim |
 | Token Telegram ([@BotFather](https://t.me/BotFather)) | Sim |
 | Token [brapi.dev](https://brapi.dev) | Recomendado |
-| Editor de código (VS Code, Cursor, etc.) | Opcional — para ver os diffs |
+| Editor de código (VS Code, Cursor, etc.) | Sim — terminal integrado para comandos |
 
 ---
 
@@ -53,26 +53,19 @@ Na primeira vez, rode `claude` e faça login na conta Anthropic.
 
 ## Setup do projeto (antes da aula)
 
+No **Cursor**, abra o terminal integrado (**`` Ctrl+` ``**) e rode na ordem:
+
 ```bash
 git clone -b starter git@github.com:mateuscqueiros/telegram-stock-bot.git
 cd telegram-stock-bot
-
 python -m venv .venv
+source .venv/Scripts/activate
 pip install -r requirements.txt
-
-cp .env.example .env               # Windows CMD: copy .env.example .env
+cp .env.example .env
+python -c "import telegram, httpx; print('OK')"
 ```
 
-Ative o venv **antes** do `pip install` (escolha conforme seu terminal):
-
-| Terminal | Comando |
-|---|---|
-| **Git Bash** (Windows) | `source .venv/Scripts/activate` |
-| **PowerShell** (Windows) | `.venv\Scripts\Activate.ps1` |
-| **CMD** (Windows) | `.venv\Scripts\activate.bat` |
-| **Mac / Linux** | `source .venv/bin/activate` |
-
-Edite o **`.env`**:
+Edite o **`.env`** no Cursor com seus tokens:
 ```env
 TELEGRAM_TOKEN=seu_token_do_botfather
 BRAPI_TOKEN=seu_token_brapi
@@ -104,12 +97,13 @@ Smoke test: `python -c "import telegram, httpx; print('OK')"`
 
 ## Roteiro — prompts para o Claude Code
 
-Abra o terminal **na pasta do projeto** e use `claude` (modo interativo) ou `claude "prompt"` (one-shot).
+**Cursor** → **File → Open Folder** → `telegram-stock-bot`  
+Terminal (**`` Ctrl+` ``**) — mantenha o venv ativo (`(.venv)` no prompt).
 
 ### Bloco 1 (0–5 min) — Primeiro contato
 
 ```bash
-cd telegram-stock-bot
+source .venv/Scripts/activate
 claude
 ```
 
@@ -121,14 +115,10 @@ Depois:
 
 ### Bloco 2 (5–20 min) — Bot vivo
 
-One-shot ou no chat:
+No terminal do Cursor:
 
 ```bash
 claude "Leia CLAUDE.md e bot/config.py. Crie bot/handlers/commands.py com /start e /help e bot/main.py registrando os handlers. Use async, python-telegram-bot v21, token de config. Implemente tudo."
-```
-
-Validar:
-```bash
 python -m bot.main
 ```
 Teste `/start` e `/help` no Telegram.

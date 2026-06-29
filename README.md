@@ -27,26 +27,18 @@ Bot em Python que consulta cotações da B3 via [brapi.dev](https://brapi.dev) e
 
 ## Clone e setup
 
+No **Cursor**, abra o terminal integrado (**`` Ctrl+` ``**) e rode na ordem:
+
 ```bash
 git clone git@github.com:mateuscqueiros/telegram-stock-bot.git
 cd telegram-stock-bot
-
 python -m venv .venv
+source .venv/Scripts/activate
 pip install -r requirements.txt
-
-cp .env.example .env               # Windows CMD: copy .env.example .env
+cp .env.example .env
 ```
 
-Ative o venv **antes** do `pip install` (escolha conforme seu terminal):
-
-| Terminal | Comando |
-|---|---|
-| **Git Bash** (Windows) | `source .venv/Scripts/activate` |
-| **PowerShell** (Windows) | `.venv\Scripts\Activate.ps1` |
-| **CMD** (Windows) | `.venv\Scripts\activate.bat` |
-| **Mac / Linux** | `source .venv/bin/activate` |
-
-Edite o `.env`:
+Edite o `.env` no Cursor com seus tokens:
 
 ```env
 TELEGRAM_TOKEN=seu_token_do_botfather
@@ -54,13 +46,15 @@ BRAPI_TOKEN=seu_token_brapi
 ALERT_INTERVAL_SECONDS=60
 ```
 
-Smoke test:
+Smoke test (com o venv ativo — prefixo `(.venv)` no prompt):
 
 ```bash
 python -c "import telegram, httpx; print('OK')"
 ```
 
 ## Como rodar
+
+Com o venv ativo no terminal do Cursor:
 
 ```bash
 python -m bot.main

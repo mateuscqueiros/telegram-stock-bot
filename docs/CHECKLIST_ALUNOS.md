@@ -33,39 +33,31 @@ Teste: `claude --version` (faça login na primeira execução)
 
 ## Setup do projeto
 
+No **Cursor**, abra o terminal integrado (**`` Ctrl+` ``**) e rode na ordem:
+
 ```bash
 git clone -b starter git@github.com:mateuscqueiros/telegram-stock-bot.git
 cd telegram-stock-bot
-
 python -m venv .venv
+source .venv/Scripts/activate
 pip install -r requirements.txt
-
-cp .env.example .env               # Windows CMD: copy .env.example .env
+cp .env.example .env
+python -c "import telegram, httpx; print('OK')"
 ```
 
-Ative o venv **antes** do `pip install` (escolha conforme seu terminal):
-
-| Terminal | Comando |
-|---|---|
-| **Git Bash** (Windows) | `source .venv/Scripts/activate` |
-| **PowerShell** (Windows) | `.venv\Scripts\Activate.ps1` |
-| **CMD** (Windows) | `.venv\Scripts\activate.bat` |
-| **Mac / Linux** | `source .venv/bin/activate` |
-
-Edite o **`.env`**:
+Edite o **`.env`** no Cursor com seus tokens:
 ```env
 TELEGRAM_TOKEN=seu_token_do_botfather
 BRAPI_TOKEN=seu_token_brapi
 ```
 
-Smoke test: `python -c "import telegram, httpx; print('OK')"`
-
 ## Na aula
 
-1. Abra o terminal **na pasta do projeto**
-2. Rode `claude` ou `claude "prompt"`
-3. **Aprove os diffs** que o Claude Code propõe
-4. Valide com `python -m bot.main` e teste no Telegram
+1. **Cursor** → **File → Open Folder** → pasta `telegram-stock-bot`
+2. Terminal (**`` Ctrl+` ``**) — confirme `(.venv)` no prompt; se não, rode `source .venv/Scripts/activate`
+3. Rode `claude` ou `claude "prompt"`
+4. **Aprove os diffs** que o Claude Code propõe
+5. Valide com `python -m bot.main` e teste no Telegram
 
 Links:
 - [Repo starter](https://github.com/mateuscqueiros/telegram-stock-bot/tree/starter)

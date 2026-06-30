@@ -108,9 +108,16 @@ bot/
 
 ## Workshop
 
-Workshop de **1 hora** com **Claude Code** (CLI). Alunos enviam prompts; o Claude implementa o código.
+Workshop em **3 partes** com **Claude Code** (CLI). Alunos pilotam a sessão; o Claude implementa o código.
+
+| Parte | Tempo | Foco |
+|---|---|---|
+| 1 | 15 min | Claude Code: sessão, atalhos, arquivos `.md`, subagentes |
+| 2 | 15 min | Construir o bot via prompts |
+| 3 | Aberta | Arquitetura, produção, reverse prompt engineering |
 
 - **Alunos:** `git clone -b starter ...` — veja o README da branch starter
-- **Instrutor:** [docs/GUIA_INSTRUTOR.md](docs/GUIA_INSTRUTOR.md) · [docs/CHECKLIST_ALUNOS.md](docs/CHECKLIST_ALUNOS.md)
+- **Palestrante:** [docs/ROTEIRO_PALESTRANTE.md](docs/ROTEIRO_PALESTRANTE.md) · [docs/CLAUDE_CODE.md](docs/CLAUDE_CODE.md) · [docs/PROMPT_MESTRE.md](docs/PROMPT_MESTRE.md)
+- **Checklist pré-aula:** [docs/CHECKLIST_ALUNOS.md](docs/CHECKLIST_ALUNOS.md)
 - **Contexto do projeto:** [CLAUDE.md](CLAUDE.md)
 - **Solução:** branch `main`
